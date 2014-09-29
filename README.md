@@ -1,6 +1,6 @@
 chat
 ====
-Chat - is a simple application for real-time online text conversation.
+Chat is a simple application for real-time online text conversations.
 
 Key features:
 - Sign In with OpenID
