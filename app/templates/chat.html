@@ -1,0 +1,69 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+.messages_space {
+height: 250px;
+width: 404px;
+background: #fff;
+border: 1px solid lightgrey;
+overflow-y: scroll;
+float:left;
+margin-bottom: 10px;
+}
+
+.chat_room {
+height: 230px;
+width: 154px;
+background: #fff;
+border: 1px solid lightgrey;
+overflow-y: scroll;
+float:left;
+margin-bottom: 10px;
+}
+
+</style>
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="cache-control" content="no-cache" />
+
+<h2>Hi, {{user.nickname}}!</h2>
+	<header>
+		<h4>Current chat room: {{current_room_name}}</h4>
+	</header>
+		<span class="nickname" style="display:none">{{user.nickname}}</span>
+		<span class="chat=id" style="display:none">1</span>	
+
+				<div class="messages_space" id="block" >
+					<ul class="messages">
+					</ul>			
+				</div>
+
+				<div class='chat_room'  style='padding:10px'>
+						<span class='room-id' style='display: none'>{{current_room}}</span>
+						<center>
+						<a href="{{ url_for('manage_rooms') }}">Manage rooms</a><br>		
+						<form  action="{{url_for('search')}}" method="post" name="search">{{g.search_form.hidden_tag()}}{{g.search_form.name(size=10)}}<input type="submit" value="Search room"></form>
+						<hr>
+						<i>~ Chat rooms ~</center></i>
+						{% for room in rooms %}					
+							<div style='margin-top: 5px; padding-bottom: 3px; background-color: #EEE685; width: 100%'>
+								<center><a href="{{url_for('room', room_id = room.id)}}">{{room.name}}</a></center>
+							</div>
+						{% endfor %}
+				</div>
+		<form class="compose-message-form">
+			<textarea placeholder="Type your message here" name="message" rows="5" required id="mymessage" style='width: 576px'></textarea>
+		</form>
+		<center><font color=grey>Press Enter to send message</font></center>
+		
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script src="{{ url_for('static', filename='scripts/socket.io.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='scripts/chat.js') }}"></script>
+
+{% endblock %}

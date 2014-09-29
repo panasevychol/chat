@@ -1,0 +1,31 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.back-link {
+float:right;
+}
+</style>
+<h2>Create a room:</h2>
+            <form action="" method="post" name="manage_rooms">
+            {{form.hidden_tag()}}
+            New room name:
+            {{ form.name(size = 20, maxlength = 100) }}
+            {% for error in form.errors.manage_rooms %}
+            <span style="color: crimson;">[{{error}}]</span><br>
+            {% endfor %}
+            <input type="submit" value="Create">
+			</form>
+<br>
+You can also delete empty rooms
+<div class="back-link"><a href="{{ url_for('chat') }}">Back to Chat</a></div>
+<hr>
+<center><i>~ Empty rooms ~</i></center>
+{% for empty_room in empty_rooms %}
+    <div style='margin-top: 5px; padding-bottom: 3px; background-color: #EEE685; width: 100%'>
+        <center><a href="{{url_for('room', room_id = empty_room.id)}}">{{empty_room.name}}</a> | <a href="{{url_for('delete_room', room_id = empty_room.id)}}"  style='color: grey; '>delete</a></center>
+    </div>
+{% endfor %}
+
+{% endblock %}

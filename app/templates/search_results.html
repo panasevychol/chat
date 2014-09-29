@@ -1,0 +1,12 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Search results for "{{query}}" in chat rooms:</h2>
+{% for room in results %}
+    <div style='margin-top: 5px; padding-bottom: 3px; background-color: #EEE685; width: 100%'>
+		<center><a href="{{url_for('room', room_id = room.id)}}">{{room.name}}</a></center>
+	</div>
+{% endfor %}
+
+{% endblock %}
