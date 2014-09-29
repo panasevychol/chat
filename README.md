@@ -1,4 +1,4 @@
-chat
+Chat
 ====
 Chat is a simple application for real-time online text conversations.
 
